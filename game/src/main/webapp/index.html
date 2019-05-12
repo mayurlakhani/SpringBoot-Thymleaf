@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<style>
+  body {
+      position: relative;
+  }
+  ul.nav-pills {
+      top: 20px;
+      position: fixed;
+  }
+  div.col-sm-9 div {
+      height: 250px;
+      font-size: 28px;
+  }
+  #section1 {color: #fff; background-color: #1E88E5;}
+  #section2 {color: #fff; background-color: #673ab7;}
+  #section3 {color: #fff; background-color: #ff9800;}
+  #section41 {color: #fff; background-color: #00bcd4;}
+  #section42 {color: #fff; background-color: #009688;}
+  
+  @media screen and (max-width: 810px) {
+    #section1, #section2, #section3, #section41, #section42  {
+        margin-left: 150px;
+    }
+  }
+  </style>
+</head>
+<body>
+	<div class="container">
+  		<div class="jumbotron">
+    		<h1>welcome to site</h1>
+    	</div>
+    	 <button type="button" class="btn btn-link">Link</button>
+    	 
+    	 <div class="dropdown">
+  			  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+  				<span class="caret"></span></button>
+  					<ul class="dropdown-menu">
+   						<li><a href="#">HTML</a></li>
+   						<li><a href="#">CSS</a></li>
+    					<li><a href="#">JavaScript</a></li>
+  					</ul>
+		</div>
+		<h2>Dropdowns</h2>
+  			<p>The .divider class is used to separate links inside the dropdown menu:</p>
+  		<div class="dropdown">
+    		<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+    		<span class="caret"></span></button>
+    			<ul class="dropdown-menu">
+      				<li><a href="#">HTML</a></li>
+      				<li><a href="#">CSS</a></li>
+     				<li><a href="#">JavaScript</a></li>
+      				<li class="divider"></li>
+      				<li><a href="#">About Us</a></li>
+    			</ul>
+  		</div>
+
+		
+	</div>
+</body>
+</html>

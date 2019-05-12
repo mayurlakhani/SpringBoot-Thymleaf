@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> ADD COUNTRY </title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  	<!-- css files -->
+  	<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/index.css}" />
+	
+	<!-- js files -->
+  	<script th:src="@{/js/jquery/jquery.min.js}"></script>
+  	<script src="/js/jquery/jquery.validate.min.js"></script>
+  	<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+  	<script type="text/javascript" th:src="@{/js/country.js}"></script>
+  
+</head>
+<body>
+<div class="row">
+	<div class="col-xs-4">
+		<nav class="col-sm-3" id="myScrollspy">
+      		<ul class="nav nav-pills">
+      			<li class="active"><a th:href="@{/home}">Home</a></li>
+        		<li class="active"><a th:href="@{/}">Add Country</a></li>
+		        <li class="active"><a th:href="@{/game/addGame}">Add Game</a></li>
+		        <li class="active"><a th:href="@{/player/addPlayer}">Add Player</a></li>
+		    </ul>   		 
+      	</nav>
+      	</div>
+	</div>
+	<div>
+	<h1 align="center">ADD Country :</h1>
+	</div>
+		<div class="alert alert-success" th:if="${successMsg != null}">
+			 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ 			 <strong>Success!</strong><p th:text="${successMsg}" ></p>.
+		</div>
+		<div class="alert alert-info" th:if="${errorMsg != null}">
+			 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+ 			 <strong>Info!</strong><p th:text="${errorMsg}" ></p>.
+		</div>
+	<form class="form-horizontal" th:action="@{/}" id="addcountry" th:object="${country}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+           <table>
+                <tr>
+                    <td>
+	                    <div class="form-group">
+	                    	<label class="control-label col-sm-2" for="Name">Name:</label>
+	                    		<div class="col-sm-10">
+	                    			<input class="form-control" th:field="*{name}" type="text" required="true" />
+	                    		</div>
+	                    </div>
+                    </td>
+                </tr>
+                <tr>
+               		<input type="hidden" th:field="*{id}" th:if="${edited != null}"/>
+                </tr>
+                <tr>
+                	<td>
+                		<div class="form-group">
+	                		<div class="col-sm-offset-2 col-sm-10">
+	                			<input class="btn btn-default" type="submit" value="Submit" /> 
+	                		</div>
+                		</div>
+                	</td>
+                </tr>
+            </table>
+            
+            <h1>Country List</h1>
+            <div class="table-responsive">
+			<table class="table table-condensed" align="center" style="width:550px;">
+				<thead>
+					<tr>
+						<th>Sr No.</th>
+						<th>Name</th>
+				   <!-- <th>Delete</th> -->
+						<th>Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="country, status : ${countrylists}">
+						<td th:text="${status.index + 1}"></td>
+						<td th:text="${country.name}"></td>
+						<!-- <td><a th:href="@{'/deletecountry/' + ${country.id}}"
+									onClick="return confirm('Are you absolutely sure you want to edit?')"><span>Delete</span>
+							</a>
+						</td> -->
+						<td><a th:href="@{'/get/' + ${country.id}}" 
+								onClick="return confirm('Are you want to edit ?')">
+										<span>Edit</span>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+		   </table>
+		   </div>
+      </form>
+</body>
+</html>

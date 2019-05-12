@@ -1,0 +1,7 @@
+<th:block th:fragment="copy">
+	<label>selected Game :</label>
+	<select id="tdId">
+	<option th:each="list, status : ${games}" th:value="${list.gameName}"
+              th:text="${list.gameName}" ></option>
+    </select>
+</th:block>

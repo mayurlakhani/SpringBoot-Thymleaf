@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Bootstrap Example</title>
+	<meta charset="utf-8" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  	
+  	<!-- css files -->
+  	
+  	<link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/index.css}" />
+	<link rel="stylesheet" th:href="@{/css/home.css}" />
+	<!-- js files -->
+	
+  	<script th:src="@{/js/jquery/jquery.min.js}"></script>
+  	<script type="text/javascript" th:src="@{/js/bootstrap/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+
+<div class="container">
+  <div class="jumbotron">
+  <p align="center">Game site</p>
+  </div>
+  
+	<div class="row">
+    	<nav class="col-sm-3" id="myScrollspy">
+      		<ul class="nav nav-pills ">
+      			<li class="active"><a th:href="@{/home}">Home</a></li>
+        		<li class="active"><a th:href="@{/}">Add Country</a></li>
+		        <li class="active"><a th:href="@{game/addGame}">Add Game</a></li>
+		        <li class="active"><a th:href="@{player/addPlayer}">Add Player</a></li>
+		    </ul>   		 
+      	</nav>
+		<div class="row">
+		
+		<!-- Success message -->
+		<div class="alert alert-success" th:if="${successMsg!= null}">  
+  			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  			<strong>Success!</strong> <p th:text="${successMsg}" ></p>
+		</div>
+		<div class="alert alert-info" id="error" th:if="${errorMsg!= null}">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<strong>Info!</strong> <p th:text="${errorMsg}" ></p>
+		</div>
+	      <form class="form-horizontal" th:action="@{/home}" th:object="${gameDTO}" method="post" enctype="multipart/form-data">
+	 	    <table>
+	 	    	<tr>
+	 	    		<td>
+	 	    			<div class="form-group row">
+							<label class=" col-sm-6">SelectCountry:</label>
+							   <div class="col-sm-8">
+									<select class="form-control" id="countrylist" name="countryName">
+										<option th:value="-1">select country</option>
+										<option th:each="country, status : ${countrylists}" th:value="${country.id}"
+				              		 				th:text="${country.name}" th:selected="${country == 'INDIA'}"></option>
+			                     	</select>   
+		                     	</div>	
+		                 </div> 
+	                </td>
+	                <td>
+	                	<div id="gameOptId" class="form-group row">
+	                		<th:block th:fragment="gameListFragment">
+								<label class=" col-sm-6">SelectGame:</label>
+								    <div class="col-sm-8">
+										<select class="form-control" id="tdId" onchange="getPlayerList(this)">
+											<option th:value="-1">select game</option>
+											<option th:each="countryGame : ${countryGames}" th:value="${countryGame.game.id}"
+							              		th:text="${countryGame.game.gameName}"></option>
+							    		</select>
+							    	</div>
+					    	</th:block>
+	                	</div>	
+	                	<!-- <th:block th:include="gameList :: copy"></th:block> -->
+				    </td>
+	            </tr>
+	        </table>
+	       	<hr/>
+			<div id="playerlist" class="row">
+			<div class="col-xs-12">
+	        <th:block th:fragment="playerListFragment">	
+		   		<div class="pull-left image_div" th:each="player, status : ${players}">
+				 	<a th:href="@{'/player/getallplayerdata?id=' + ${player.id}}">
+   				 		<img class="img-thumbnail" alt="playerimage" id="img" name="player.id" th:value="${player.image.id}" 
+   				 			th:src="@{'/player/getImage?filePath=' + ${player.image.imagePath}}" 
+   				  				height="220px" width="170px" />
+   					</a> 
+ 		  	
+ 		   			<div class="desc">
+ 			 			<table>
+ 			 				<tr>
+								<td>id :</td>
+								<td th:text="${player.id}"></td>
+							</tr>
+							<tr>
+								<td>Name :</td> 
+								<td th:text="${player.playerName}"></td>
+							</tr>
+							<tr>
+								<td>Matches :</td>
+								<td th:text="${player.matches}"></td>
+							</tr>
+							<tr>
+								<td>date:</td>
+								<td th:text="${#dates.format(player.image.updatedDate, 'dd/MM/yyyy hh:mm a')}"></td>
+							</tr>
+						</table>
+  			 		</div>
+		    	</div>
+		   </th:block>
+        	</div>
+        	</div>
+	      </form>
+	      <!-- </div> -->
+      </div>
+   </div>
+ </div>
+</body>
+</html>
